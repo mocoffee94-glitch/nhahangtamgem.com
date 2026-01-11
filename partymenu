@@ -1,0 +1,262 @@
+import { Users, UtensilsCrossed, Heart, Gift, CheckCircle2, X } from 'lucide-react';
+import { Card, CardContent } from './ui/card';
+import { Button } from './ui/button';
+import { useState } from 'react';
+
+export function PartyMenu() {
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+
+  const partyPackages = [
+    {
+      name: 'Menu Tiệc',
+      price: '180.000 VNĐ/khách',
+      menuImages: [],
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt'
+    },
+    {
+      name: 'Menu Tiệc',
+      price: '200.000 VNĐ/khách',
+      menuImages: [],
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt'
+    },
+    {
+      name: 'Menu Tiệc',
+      price: '250.000 VNĐ/khách',
+      menuImages: [],
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt'
+    },
+    {
+      name: 'Menu Tiệc',
+      price: '300.000 VNĐ/khách',
+      menuImages: [],
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt'
+    },
+    {
+      name: 'Menu Tiệc',
+      price: '350.000 VNĐ/khách',
+      menuImages: [],
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt'
+    },
+    {
+      name: 'Menu Tiệc',
+      price: '400.000 VNĐ/khách',
+      menuImages: [],
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt'
+    },
+    {
+      name: 'Menu Tiệc',
+      price: '450.000 VNĐ/khách',
+      menuImages: [],
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt'
+    },
+    {
+      name: 'Menu Tiệc',
+      price: '500.000 VNĐ/khách',
+      menuImages: [],
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt'
+    },
+  ];
+
+  const partyServices = [
+    {
+      icon: Heart,
+      title: 'Tiệc Cưới & Gia Đình',
+      description: 'Tổ chức tiệc cưới, sinh nhật, kỷ niệm với không gian ấm cúng'
+    },
+    {
+      icon: Users,
+      title: 'Tiệc Công Ty',
+      description: 'Phục vụ tiệc tất niên, họp mặt, hội nghị doanh nghiệp'
+    },
+    {
+      icon: UtensilsCrossed,
+      title: 'Menu Đa Dạng',
+      description: '8 gói thực đơn từ 180k-500k phù hợp mọi ngân sách'
+    },
+    {
+      icon: Gift,
+      title: 'Dịch Vụ Trọn Gói',
+      description: 'Trang trí, âm thanh, MC chuyên nghiệp theo yêu cầu'
+    }
+  ];
+
+  const partyFeatures = [
+    'Sức chứa linh hoạt từ 50-300 khách',
+    'Không gian riêng tư hoặc phòng VIP',
+    'Trang trí theo chủ đề theo yêu cầu',
+    'Hệ thống âm thanh ánh sáng hiện đại',
+    'Đội ngũ phục vụ chuyên nghiệp',
+    'Menu tùy chỉnh theo sở thích',
+    'Ưu đãi cho đặt tiệc số lượng lớn',
+    'Tư vấn miễn phí về tổ chức sự kiện'
+  ];
+
+  return (
+    <section id="banquet" className="py-20 bg-gradient-to-b from-amber-50 to-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-block mb-4">
+            <div className="h-1 w-16 bg-amber-700 mx-auto mb-4"></div>
+          </div>
+          <h2 className="text-4xl md:text-5xl text-amber-900 mb-4">
+            Tổ Chức Tiệc
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Tạo nên những khoảnh khắc đáng nhớ với dịch vụ tổ chức tiệc chuyên nghiệp. 
+            Từ tiệc cưới, sinh nhật đến sự kiện công ty - chúng tôi đem đến trải nghiệm hoàn hảo!
+          </p>
+        </div>
+
+        {/* Party Services */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {partyServices.map((service, index) => (
+            <Card key={index} className="hover:shadow-xl transition-shadow">
+              <CardContent className="p-6 text-center">
+                <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <service.icon className="w-8 h-8 text-amber-800" />
+                </div>
+                <h3 className="text-xl text-gray-900 mb-2">{service.title}</h3>
+                <p className="text-gray-600">{service.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Party Packages */}
+        <div className="mb-16">
+          <h3 className="text-3xl text-amber-900 text-center mb-8">
+            Các Gói Menu Tiệc
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {partyPackages.map((pkg, index) => (
+              <Card key={index} className="hover:shadow-xl transition-shadow">
+                <CardContent className="p-6">
+                  <div className="text-center mb-4">
+                    <div className="inline-block p-3 bg-amber-100 rounded-full mb-3">
+                      <UtensilsCrossed className="w-8 h-8 text-amber-800" />
+                    </div>
+                    <h3 className="text-2xl text-gray-900 mb-2">{pkg.name}</h3>
+                    <p className="text-3xl text-amber-800 mb-2">{pkg.price}</p>
+                    <p className="text-sm text-gray-600">{pkg.description}</p>
+                  </div>
+                  
+                  {pkg.menuImages.length > 0 ? (
+                    <div className="space-y-3 mt-4">
+                      <p className="text-xs text-red-600 bg-red-50 p-2 rounded">
+                        DEBUG: {pkg.menuImages.length} ảnh - {pkg.menuImages[0] ? 'Image 1 OK' : 'Image 1 NULL'}
+                      </p>
+                      {pkg.menuImages.map((image, imgIndex) => (
+                        <div key={imgIndex} className="relative group bg-white">
+                          <p className="text-xs text-blue-600 mb-1">Image {imgIndex + 1}: {image ? image.substring(0, 50) + '...' : 'NULL'}</p>
+                          <img
+                            src={image}
+                            alt={`${pkg.name} ${pkg.price} - Menu ${imgIndex + 1}`}
+                            className="w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity border border-gray-200 shadow-sm"
+                            onClick={() => setZoomedImage(image)}
+                            onError={(e) => {
+                              console.error('Image failed to load:', image);
+                              e.currentTarget.style.display = 'none';
+                            }}
+                            onLoad={() => {
+                              console.log('Image loaded successfully:', image);
+                            }}
+                          />
+                          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all rounded-lg flex items-center justify-center pointer-events-none">
+                            <p className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-sm">
+                              Click để xem rõ
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="mt-4 p-8 bg-gray-100 rounded-lg text-center">
+                      <UtensilsCrossed className="w-12 h-12 text-gray-400 mx-auto mb-2" />
+                      <p className="text-gray-500 text-sm">Menu sẽ được cập nhật</p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Party Features */}
+        <Card className="bg-gradient-to-br from-amber-50 to-white shadow-xl">
+          <CardContent className="p-8">
+            <h3 className="text-2xl text-amber-900 text-center mb-8">
+              Ưu Điểm Dịch Vụ Tổ Chức Tiệc
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {partyFeatures.map((feature, index) => (
+                <div key={index} className="flex items-start space-x-3">
+                  <CheckCircle2 className="w-6 h-6 text-amber-700 flex-shrink-0 mt-1" />
+                  <p className="text-gray-700">{feature}</p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* CTA */}
+        <div className="mt-12 text-center">
+          <Card className="bg-gradient-to-r from-amber-800 to-amber-900 text-white shadow-2xl">
+            <CardContent className="p-8">
+              <h3 className="text-3xl mb-4">Đặt Tiệc Ngay Hôm Nay!</h3>
+              <p className="text-xl mb-6 opacity-90">
+                Liên hệ để được tư vấn và nhận ưu đãi đặc biệt
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">📞</span>
+                  <div className="text-left">
+                    <p className="text-sm opacity-80">Hotline</p>
+                    <p className="text-xl">0905 657 585</p>
+                  </div>
+                </div>
+                <div className="hidden sm:block text-2xl opacity-50">|</div>
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">📞</span>
+                  <div className="text-left">
+                    <p className="text-sm opacity-80">Hotline 2</p>
+                    <p className="text-xl">0935 657 585</p>
+                  </div>
+                </div>
+                <div className="hidden sm:block text-2xl opacity-50">|</div>
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">📞</span>
+                  <div className="text-left">
+                    <p className="text-sm opacity-80">Hotline 3</p>
+                    <p className="text-xl">0886 737 373</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
+      {/* Zoomed Image Modal */}
+      {zoomedImage && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
+          onClick={() => setZoomedImage(null)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+            onClick={() => setZoomedImage(null)}
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <img
+            src={zoomedImage}
+            alt="Menu phóng to"
+            className="max-w-full max-h-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+    </section>
+  );
+}
