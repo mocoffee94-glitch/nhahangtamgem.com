@@ -1,0 +1,133 @@
+import { Utensils, Users, Award, Heart } from 'lucide-react';
+import Slider from 'react-slick';
+
+import restaurantEntrance from 'figma:asset/bcb7eb46fd963c14d52fadf4aaf07d424874f134.png';
+import restaurantInterior1 from 'figma:asset/517254f9460d02bd2f620cdf062b7b22f81be886.png';
+import restaurantInterior2 from 'figma:asset/c2154be32f5b4c511f4aac15b68a3f3cbc20df85.png';
+
+export function About() {
+  const features = [
+    {
+      icon: Utensils,
+      title: 'Ẩm Thực Truyền Thống',
+      description: 'Món ăn được chế biến từ nguyên liệu tươi ngon, đậm đà hương vị Việt Nam'
+    },
+    {
+      icon: Users,
+      title: 'Phục Vụ Đoàn',
+      description: 'Chuyên phục vụ các đoàn du lịch, hội nghị với sức chứa lớn'
+    },
+    {
+      icon: Award,
+      title: 'Chất Lượng Đảm Bảo',
+      description: 'Cam kết chất lượng món ăn và dịch vụ chuyên nghiệp'
+    },
+    {
+      icon: Heart,
+      title: 'Phục Vụ Tận Tâm',
+      description: 'Đội ngũ nhân viên nhiệt tình, chu đáo trong từng chi tiết'
+    }
+  ];
+
+  const restaurantImages = [
+    { src: restaurantEntrance, alt: 'Cổng vào nhà hàng Tâm Gém' },
+    { src: restaurantInterior1, alt: 'Không gian bên trong nhà hàng' },
+    { src: restaurantInterior2, alt: 'Khu vực phục vụ khách' }
+  ];
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    arrows: true,
+    adaptiveHeight: true
+  };
+
+  return (
+    <section id="about" className="py-20 bg-gradient-to-b from-white to-amber-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <div className="inline-block mb-4">
+            <div className="h-1 w-16 bg-amber-700 mx-auto mb-4"></div>
+          </div>
+          <h2 className="text-4xl md:text-5xl text-amber-900 mb-4">
+            Câu Chuyện Tâm Gém
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Giữa lòng Đồng Hới, Tâm Gém mở ra như một góc nhà thân quen, nơi bà con ghé về ăn bữa cơm "vị nhà" thiết thà, quây quần nói chuyện rộn rã như ở nhà.
+          </p>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4 leading-relaxed">
+            Tên quán thiết ra cũng đơn giản - <span className="text-amber-800">Tâm</span> là tâm huyết, tâm lòng người nấu, nấu sao cho thiết ngân lành. <span className="text-amber-800">Gém</span> là gỏi gém từng chút thương, chút nhỏ, từng hương vị từng nguyên đỗ bữa cơm nhỏ đỗ và từng niềm cảm, cảm cá, tỏ cảnh. Chỉ mong mỗi bữa cơm ở đây, ai đến rồi cũng thấy nhà thiêng, âm lòng. 
+          </p>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4 leading-relaxed">
+            Mỗi chỗ quen nẻ, Gém không chỉ có cơm, ngon, hương vị quê nhà mà còn là chỗ để người chơi thoải mái. Ở đây ăn mà chơi, chơi mà ăn, bữa nào cũng thiệt vui.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {features.map((feature, index) => (
+            <div 
+              key={index}
+              className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow border-t-4 border-amber-700"
+            >
+              <div className="w-14 h-14 bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                <feature.icon className="w-7 h-7 text-amber-800" />
+              </div>
+              <h3 className="text-xl text-gray-900 mb-3">
+                {feature.title}
+              </h3>
+              <p className="text-gray-600">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 bg-white rounded-xl shadow-lg p-8 md:p-12 border border-amber-200">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 className="text-3xl text-amber-900 mb-4">
+                Không Gian Sang Trọng, Ấm Cúng
+              </h3>
+              <p className="text-gray-600 mb-4">
+                Nhà hàng được thiết kế theo phong cách truyền thống Việt Nam kết hợp với 
+                tiện nghi hiện đại, tạo nên không gian ấm cúng và trang nhã cho mọi bữa tiệc.
+              </p>
+              <p className="text-gray-600 mb-6">
+                Chúng tôi phục vụ đa dạng các nhu cầu từ bữa ăn gia đình, tiệc công ty, 
+                đến các đoàn du lịch với sức chứa lên đến 300 khách.
+              </p>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-amber-50 p-4 rounded-lg text-center border border-amber-200">
+                  <div className="text-3xl text-amber-800 mb-1">500+</div>
+                  <div className="text-sm text-gray-700">Sức Chứa</div>
+                </div>
+                <div className="bg-amber-50 p-4 rounded-lg text-center border border-amber-200">
+                  <div className="text-3xl text-amber-800 mb-1">200+</div>
+                  <div className="text-sm text-gray-700">Món Ăn</div>
+                </div>
+              </div>
+            </div>
+            <div className="restaurant-slider">
+              <Slider {...sliderSettings}>
+                {restaurantImages.map((image, index) => (
+                  <div key={index} className="px-2">
+                    <img 
+                      src={image.src} 
+                      alt={image.alt}
+                      className="w-full h-[400px] object-cover rounded-lg shadow-md"
+                    />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
