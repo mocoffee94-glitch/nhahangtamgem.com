@@ -1,0 +1,10 @@
+
+  # Nhà Hàng Tâm Gém Website
+
+  This is a code bundle for Nhà Hàng Tâm Gém Website. The original project is available at https://www.figma.com/design/2hK2pPTXy3HZ1ZnDAG9UPq/Nh%C3%A0-H%C3%A0ng-T%C3%A2m-G%C3%A9m-Website.
+
+  ## Running the code
+
+  Run `npm i` to install the dependencies.
+
+  Run `npm run dev` to start the development server.
