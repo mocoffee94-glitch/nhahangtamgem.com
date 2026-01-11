@@ -1,0 +1,89 @@
+import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import { Button } from './ui/button';
+import logoImage from 'figma:asset/38ca8cdd321999282b0fca4e8ccfb61dd424d7a2.png';
+
+export function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsMenuOpen(false);
+    }
+  };
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-amber-900/20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <div className="flex items-center space-x-3">
+            <img src={logoImage} alt="Tâm Gém Logo" className="h-16 w-auto" />
+            <div>
+              <h1 className="text-amber-900">Nhà Hàng Tâm Gém</h1>
+              <p className="text-sm text-gray-600">Đồng Hới - Quảng Bình</p>
+            </div>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            <button onClick={() => scrollToSection('home')} className="text-gray-700 hover:text-amber-800 transition-colors">
+              Trang Chủ
+            </button>
+            <button onClick={() => scrollToSection('about')} className="text-gray-700 hover:text-amber-800 transition-colors">
+              Giới Thiệu
+            </button>
+            <button onClick={() => scrollToSection('menu')} className="text-gray-700 hover:text-amber-800 transition-colors">
+              Thực Đơn
+            </button>
+            <button onClick={() => scrollToSection('banquet')} className="text-gray-700 hover:text-amber-800 transition-colors">
+              Tổ Chức Tiệc
+            </button>
+            <button onClick={() => scrollToSection('tours')} className="text-gray-700 hover:text-amber-800 transition-colors">
+              Tour Đoàn
+            </button>
+            <button onClick={() => scrollToSection('contact')} className="text-gray-700 hover:text-amber-800 transition-colors">
+              Liên Hệ
+            </button>
+          </nav>
+
+          {/* Mobile menu button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </Button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <nav className="md:hidden py-4 space-y-3 border-t border-amber-900/20">
+            <button onClick={() => scrollToSection('home')} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors rounded">
+              Trang Chủ
+            </button>
+            <button onClick={() => scrollToSection('about')} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors rounded">
+              Giới Thiệu
+            </button>
+            <button onClick={() => scrollToSection('menu')} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors rounded">
+              Thực Đơn
+            </button>
+            <button onClick={() => scrollToSection('banquet')} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors rounded">
+              Tổ Chức Tiệc
+            </button>
+            <button onClick={() => scrollToSection('tours')} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors rounded">
+              Tour Đoàn
+            </button>
+            <button onClick={() => scrollToSection('contact')} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-amber-50 hover:text-amber-800 transition-colors rounded">
+              Liên Hệ
+            </button>
+          </nav>
+        )}
+      </div>
+    </header>
+  );
+}
