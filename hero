@@ -1,0 +1,71 @@
+import { ImageWithFallback } from './figma/ImageWithFallback';
+import { Button } from './ui/button';
+
+export function Hero() {
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <section id="home" className="relative h-screen pt-20">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <ImageWithFallback
+          src="https://images.unsplash.com/photo-1766050586763-723571af4dde?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2aWV0bmFtZXNlJTIwdHJhZGl0aW9uYWwlMjByZXN0YXVyYW50fGVufDF8fHx8MTc2NzA3NTI2Mnww&ixlib=rb-4.1.0&q=80&w=1080"
+          alt="Nhà Hàng Tâm Gém"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60"></div>
+      </div>
+
+      {/* Content */}
+      <div className="relative h-full flex items-center justify-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Decorative pattern */}
+          <div className="mb-6 flex justify-center">
+            <div className="h-1 w-24 bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl text-white mb-6">
+            Nhà Hàng Tâm Gém
+          </h1>
+          
+          <p className="text-xl md:text-2xl text-amber-200 mb-4">
+            Hương Vị Truyền Thống Việt Nam
+          </p>
+          
+          <p className="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
+            Trải nghiệm ẩm thực đặc sắc tại Đồng Hới - Quảng Bình với thực đơn phong phú, 
+            dịch vụ tour đoàn và tổ chức tiệc chuyên nghiệp
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              onClick={() => scrollToSection('menu')}
+              size="lg"
+              className="bg-amber-700 hover:bg-amber-800 text-white px-8 py-6"
+            >
+              Xem Thực Đơn
+            </Button>
+            <Button 
+              onClick={() => scrollToSection('contact')}
+              size="lg"
+              variant="outline"
+              className="bg-white/10 backdrop-blur-sm text-white border-white/50 hover:bg-white/20 px-8 py-6"
+            >
+              Đặt Bàn Ngay
+            </Button>
+          </div>
+
+          {/* Decorative pattern */}
+          <div className="mt-12 flex justify-center">
+            <div className="h-1 w-24 bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
