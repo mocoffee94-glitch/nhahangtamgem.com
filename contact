@@ -1,0 +1,197 @@
+import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { Card, CardContent } from './ui/card';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Textarea } from './ui/textarea';
+import { useState } from 'react';
+
+export function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    guests: '',
+    date: '',
+    message: ''
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission
+    alert('Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi trong thời gian sớm nhất.');
+    setFormData({
+      name: '',
+      phone: '',
+      email: '',
+      guests: '',
+      date: '',
+      message: ''
+    });
+  };
+
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: 'Địa Chỉ',
+      content: ['118 Hữu Nghị, Nam Lý, Đồng Hới, Quảng Bình']
+    },
+    {
+      icon: Phone,
+      title: 'Điện Thoại',
+      content: ['0905 657 585', '0935 657 585', '0886 737 373']
+    },
+    {
+      icon: Mail,
+      title: 'Email',
+      content: ['mkt.tamgemqb@gmail.com']
+    },
+    {
+      icon: Clock,
+      title: 'Giờ Phục Vụ',
+      content: ['Thứ 2 - Chủ Nhật', '10:00 - 22:00']
+    }
+  ];
+
+  return (
+    <section id="contact" className="py-20 bg-gradient-to-b from-white to-amber-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <div className="inline-block mb-4">
+            <div className="h-1 w-16 bg-amber-700 mx-auto mb-4"></div>
+          </div>
+          <h2 className="text-4xl md:text-5xl text-amber-900 mb-4">
+            Liên Hệ Đặt Bàn
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Hãy liên hệ với chúng tôi để đặt bàn hoặc tư vấn về các dịch vụ. 
+            Chúng tôi luôn sẵn sàng phục vụ bạn!
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12 mb-12">
+          {/* Contact Form */}
+          <Card className="shadow-xl">
+            <CardContent className="p-8">
+              <h3 className="text-2xl text-gray-900 mb-6">Gửi Yêu Cầu Đặt Bàn</h3>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label className="block text-gray-700 mb-2">Họ và Tên *</label>
+                  <Input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    placeholder="Nhp họ và tên"
+                    className="w-full"
+                  />
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-gray-700 mb-2">Số Điện Thoại *</label>
+                    <Input
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      placeholder="0123 456 789"
+                      className="w-full"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-700 mb-2">Email</label>
+                    <Input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      placeholder="email@example.com"
+                      className="w-full"
+                    />
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-gray-700 mb-2">Số Khách</label>
+                    <Input
+                      type="number"
+                      value={formData.guests}
+                      onChange={(e) => setFormData({...formData, guests: e.target.value})}
+                      placeholder="Số lượng khách"
+                      className="w-full"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-700 mb-2">Ngày Đặt Bàn</label>
+                    <Input
+                      type="date"
+                      value={formData.date}
+                      onChange={(e) => setFormData({...formData, date: e.target.value})}
+                      className="w-full"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-gray-700 mb-2">Ghi Chú</label>
+                  <Textarea
+                    value={formData.message}
+                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    placeholder="Các yêu cầu đặc biệt..."
+                    rows={4}
+                    className="w-full"
+                  />
+                </div>
+                <Button type="submit" className="w-full bg-amber-700 hover:bg-amber-800 py-6">
+                  Gửi Yêu Cầu
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+
+          {/* Contact Information */}
+          <div>
+            <div className="grid gap-6 mb-8">
+              {contactInfo.map((info, index) => (
+                <Card key={index} className="hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6 flex items-start">
+                    <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                      <info.icon className="w-6 h-6 text-amber-800" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl text-gray-900 mb-2">{info.title}</h4>
+                      {info.content.map((line, lIndex) => (
+                        <p key={lIndex} className="text-gray-600">{line}</p>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Map Placeholder */}
+            <Card className="shadow-xl overflow-hidden">
+              <CardContent className="p-0">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3821.8577757779234!2d106.62066887592894!3d17.47156998345642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141843c1a3a42d7%3A0x7ea8f2e2e2e2e2e2!2zMTE4IEjhu7t1IE5naOG7iyBTdHJlZXQsIE5hbSBMw70sIMSQ4buTbmcgSOG7m2ksIFF14bqjbmcgQsOsbmgsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
+                  width="100%"
+                  height="400"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Vị trí Nhà Hàng Tâm Gém"
+                  className="w-full"
+                ></iframe>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Quick Contact Banner */}
+        <div className="bg-gradient-to-r from-amber-800 to-amber-900 text-white p-8 rounded-xl text-center">
+          <h3 className="text-3xl mb-4">Hotline Đặt Bàn 24/7</h3>
+          <p className="text-2xl mb-2">0905 657 585 | 0935 657 585</p>
+          <p className="text-xl opacity-90">0886 737 373</p>
+        </div>
+      </div>
+    </section>
+  );
+}
