@@ -1,0 +1,16 @@
+import storyImage from 'figma:asset/3e9ede27ba26b7602fa6f1ef31bc66450d517dda.png';
+
+export function StoryIntro() {
+  return (
+    <section className="relative">
+      {/* Câu Chuyện Tâm Gém */}
+      <div className="relative">
+        <img 
+          src={storyImage} 
+          alt="Câu chuyện Tâm Gém" 
+          className="w-full h-auto object-cover"
+        />
+      </div>
+    </section>
+  );
+}
