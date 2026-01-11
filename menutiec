@@ -1,0 +1,492 @@
+import { Users, UtensilsCrossed, Heart, Gift, CheckCircle2, X, Upload, Plus } from 'lucide-react';
+import { Card, CardContent } from './ui/card';
+import { useState, useEffect } from 'react';
+
+// Import party menu images for 180k
+import party180kMenu1 from 'figma:asset/872627a79c42a70496efc3259a0ac541518fe8e6.png';
+import party180kMenu2 from 'figma:asset/5783790cbc5390b720c34698b806c97682363a76.png';
+
+// Import party menu images for 200k
+import party200kMenu1 from 'figma:asset/63a56d238d8ce0a51599a858e7a1a34b843118b3.png';
+import party200kMenu2 from 'figma:asset/868c6b6bcad6509f7a813a268b0cfd925646f558.png';
+
+// Import party menu images for 220k
+import party220kMenu1 from 'figma:asset/ec6ed911f6f98f01aa8bdbcbe1f901eab88ecbc8.png';
+import party220kMenu2 from 'figma:asset/eac76d6fc43e41c78fedb58aacb2484434632e11.png';
+
+// Import party menu images for 250k
+import party250kMenu1 from 'figma:asset/e1492358109590379d066909ba5a417d9979d7e0.png';
+import party250kMenu2 from 'figma:asset/82be850011adcd849bbd2098e34bbcae99be6ded.png';
+
+// Import party menu images for 280k
+import party280kMenu1 from 'figma:asset/9c9bb6240d4d41d6f6552b2cd0ea22c96932a2b8.png';
+import party280kMenu2 from 'figma:asset/d1a2533e6025a6aeb12df8b2cd33a751fc53591e.png';
+
+// Import party menu images for 300k
+import party300kMenu1 from 'figma:asset/cce8757929e8a0bb47dc07fc5bc57f672e642a47.png';
+import party300kMenu2 from 'figma:asset/a75691b93101001483d5e1119699cda7a0a6e362.png';
+
+// Import party menu images for 350k
+import party350kMenu1 from 'figma:asset/fb0adbafcea87a5588730d4d6664745c2dc850b3.png';
+import party350kMenu2 from 'figma:asset/eac38f223651edf8e8436ca80c7143442a5bf24a.png';
+
+// Import party menu images for 400k
+import party400kMenu1 from 'figma:asset/44b4a5225c8660b1f7ca11aae88633fb6de44d1f.png';
+import party400kMenu2 from 'figma:asset/9be0ea7f8dc38d445e0b5ba188f7f1144a2b3040.png';
+
+// Import party menu images for 450k
+import party450kMenu1 from 'figma:asset/729d9a6c3905676c005dba051c9d2d394404de7a.png';
+import party450kMenu2 from 'figma:asset/9b4a3c4ba59ec675e537ec244214fe956d0d0cc7.png';
+
+// Import party menu images for 500k
+import party500kMenu1 from 'figma:asset/b95ad7b9f2641db533f7475651487cd0fd062d15.png';
+import party500kMenu2 from 'figma:asset/11d034b417d0cf1b3ed3383e20fde4639221a702.png';
+
+export function PartyMenuWithUpload() {
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+  const [imageUrls, setImageUrls] = useState<{[key: string]: string[]}>({});
+  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [currentPackage, setCurrentPackage] = useState('');
+
+  // Load images from localStorage on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('partyMenuImages');
+      if (saved) {
+        setImageUrls(JSON.parse(saved));
+      }
+    } catch (error) {
+      console.error('Error loading images:', error);
+    }
+  }, []);
+
+  // Save images to localStorage whenever they change
+  useEffect(() => {
+    try {
+      localStorage.setItem('partyMenuImages', JSON.stringify(imageUrls));
+    } catch (error) {
+      console.error('Error saving images:', error);
+    }
+  }, [imageUrls]);
+
+  const partyPackages = [
+    {
+      id: '180k',
+      name: 'Menu Tiệc',
+      price: '180.000 VNĐ/khách',
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt',
+      menuImages: [party180kMenu1, party180kMenu2]
+    },
+    {
+      id: '200k',
+      name: 'Menu Tiệc',
+      price: '200.000 VNĐ/khách',
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt',
+      menuImages: [party200kMenu1, party200kMenu2]
+    },
+    {
+      id: '220k',
+      name: 'Menu Tiệc',
+      price: '220.000 VNĐ/khách',
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt',
+      menuImages: [party220kMenu1, party220kMenu2]
+    },
+    {
+      id: '250k',
+      name: 'Menu Tiệc',
+      price: '250.000 VNĐ/khách',
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt',
+      menuImages: [party250kMenu1, party250kMenu2]
+    },
+    {
+      id: '280k',
+      name: 'Menu Tiệc',
+      price: '280.000 VNĐ/khách',
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt',
+      menuImages: [party280kMenu1, party280kMenu2]
+    },
+    {
+      id: '300k',
+      name: 'Menu Tiệc',
+      price: '300.000 VNĐ/khách',
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt',
+      menuImages: [party300kMenu1, party300kMenu2]
+    },
+    {
+      id: '350k',
+      name: 'Menu Tiệc',
+      price: '350.000 VNĐ/khách',
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt',
+      menuImages: [party350kMenu1, party350kMenu2]
+    },
+    {
+      id: '400k',
+      name: 'Menu Tiệc',
+      price: '400.000 VNĐ/khách',
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt',
+      menuImages: [party400kMenu1, party400kMenu2]
+    },
+    {
+      id: '450k',
+      name: 'Menu Tiệc',
+      price: '450.000 VNĐ/khách',
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt',
+      menuImages: [party450kMenu1, party450kMenu2]
+    },
+    {
+      id: '500k',
+      name: 'Menu Tiệc',
+      price: '500.000 VNĐ/khách',
+      description: 'Thực đơn tiệc phong phú cho các sự kiện đặc biệt',
+      menuImages: [party500kMenu1, party500kMenu2]
+    },
+  ];
+
+  const partyServices = [
+    {
+      icon: Heart,
+      title: 'Tiệc Kỉ Niệm & Gia Đình',
+      description: 'Tổ chức tiệc kỉ niệm, sinh nhật, liên hoan với không gian ấm cúng'
+    },
+    {
+      icon: Users,
+      title: 'Tiệc Công Ty',
+      description: 'Phục vụ tiệc tất niên, họp mặt, hội nghị doanh nghiệp'
+    },
+    {
+      icon: UtensilsCrossed,
+      title: 'Menu Đa Dạng',
+      description: '10 gói thực đơn từ 180k-500k phù hợp mọi ngân sách'
+    },
+    {
+      icon: Gift,
+      title: 'Dịch Vụ Trọn Gói',
+      description: 'Trang trí, âm thanh, MC chuyên nghiệp theo yêu cầu'
+    }
+  ];
+
+  const partyFeatures = [
+    'Sức chứa linh hoạt từ 50-300 khách',
+    'Không gian riêng tư hoặc phòng VIP',
+    'Trang trí theo chủ đề theo yêu cầu',
+    'Hệ thống âm thanh ánh sáng hiện đại',
+    'Đội ngũ phục vụ chuyên nghiệp',
+    'Menu tùy chỉnh theo sở thích',
+    'Ưu đãi cho đặt tiệc số lượng lớn',
+    'Tư vấn miễn phí về tổ chức sự kiện'
+  ];
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !currentPackage) return;
+
+    // Check if already has 3 images
+    if (getImages(currentPackage).length >= 3) {
+      alert('Mỗi gói menu chỉ được upload tối đa 3 ảnh');
+      setShowUploadModal(false);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const img = new Image();
+      img.onload = () => {
+        // Create canvas to compress image
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        // Max dimensions
+        const MAX_WIDTH = 800;
+        const MAX_HEIGHT = 1200;
+        
+        let width = img.width;
+        let height = img.height;
+
+        // Calculate new dimensions
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height = (height * MAX_WIDTH) / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width = (width * MAX_HEIGHT) / height;
+            height = MAX_HEIGHT;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        // Draw and compress
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        // Convert to base64 with compression (0.7 quality)
+        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+
+        try {
+          setImageUrls(prev => ({
+            ...prev,
+            [currentPackage]: [...(prev[currentPackage] || []), compressedBase64]
+          }));
+          setShowUploadModal(false);
+        } catch (error) {
+          console.error('Error saving image:', error);
+          alert('Lỗi: Ảnh quá lớn hoặc bộ nhớ đầy. Vui lòng thử ảnh nhỏ hơn.');
+        }
+      };
+      img.src = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleRemoveImage = (pkgId: string, index: number) => {
+    setImageUrls(prev => ({
+      ...prev,
+      [pkgId]: (prev[pkgId] || []).filter((_, i) => i !== index)
+    }));
+  };
+
+  const openUploadModal = (pkgId: string) => {
+    setCurrentPackage(pkgId);
+    setShowUploadModal(true);
+  };
+
+  const getImages = (pkgId: string) => {
+    return imageUrls[pkgId] || [];
+  };
+
+  return (
+    <section id="banquet" className="py-20 bg-gradient-to-b from-amber-50 to-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-block mb-4">
+            <div className="h-1 w-16 bg-amber-700 mx-auto mb-4"></div>
+          </div>
+          <h2 className="text-4xl md:text-5xl text-amber-900 mb-4">
+            Tổ Chức Tiệc
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Tạo nên những khoảnh khắc đáng nhớ với dịch vụ tổ chức tiệc chuyên nghiệp. 
+            Từ tiệc cưới, sinh nhật đến sự kiện công ty - chúng tôi đem đến trải nghiệm hoàn hảo!
+          </p>
+        </div>
+
+        {/* Party Services */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {partyServices.map((service, index) => (
+            <Card key={index} className="hover:shadow-xl transition-shadow">
+              <CardContent className="p-6 text-center">
+                <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <service.icon className="w-8 h-8 text-amber-800" />
+                </div>
+                <h3 className="text-xl text-gray-900 mb-2">{service.title}</h3>
+                <p className="text-gray-600">{service.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Party Packages */}
+        <div className="mb-16">
+          <h3 className="text-3xl text-amber-900 text-center mb-8">
+            Các Gói Menu Tiệc
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {partyPackages.map((pkg) => (
+              <Card key={pkg.id} className="hover:shadow-xl transition-shadow">
+                <CardContent className="p-6">
+                  <div className="text-center mb-4">
+                    <div className="inline-block p-3 bg-amber-100 rounded-full mb-3">
+                      <UtensilsCrossed className="w-8 h-8 text-amber-800" />
+                    </div>
+                    <h3 className="text-2xl text-gray-900 mb-2">{pkg.name}</h3>
+                    <p className="text-3xl text-amber-800 mb-2">{pkg.price}</p>
+                    <p className="text-sm text-gray-600">{pkg.description}</p>
+                  </div>
+                  
+                  {pkg.menuImages || getImages(pkg.id).length > 0 ? (
+                    <div className="space-y-3 mt-4">
+                      {/* Display fixed menuImages from figma:asset */}
+                      {pkg.menuImages && pkg.menuImages.map((img, imgIndex) => (
+                        <img
+                          key={`fixed-${imgIndex}`}
+                          src={img}
+                          alt={`${pkg.name} - Thực đơn ${imgIndex + 1}`}
+                          className="w-full h-auto object-contain cursor-pointer hover:opacity-90 transition-opacity rounded-lg shadow-md"
+                          onClick={() => setZoomedImage(img)}
+                        />
+                      ))}
+                      
+                      {/* Display uploaded images from localStorage */}
+                      {getImages(pkg.id).map((image, imgIndex) => (
+                        <div key={`upload-${imgIndex}`} className="relative group">
+                          <img
+                            src={image}
+                            alt={`${pkg.name} ${pkg.price} - Menu ${imgIndex + 1}`}
+                            className="w-full h-auto object-contain rounded-lg cursor-pointer hover:opacity-90 transition-opacity shadow-md"
+                            onClick={() => setZoomedImage(image)}
+                          />
+                          <button
+                            onClick={() => handleRemoveImage(pkg.id, imgIndex)}
+                            className="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ))}
+                      
+                      {!pkg.menuImages && (
+                        <button
+                          onClick={() => openUploadModal(pkg.id)}
+                          className="w-full py-3 border-2 border-dashed border-amber-300 rounded-lg text-amber-700 hover:bg-amber-50 transition-colors flex items-center justify-center gap-2"
+                        >
+                          <Plus className="w-5 h-5" />
+                          Thêm ảnh menu
+                        </button>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="bg-amber-50 border-2 border-dashed border-amber-300 rounded-lg p-8 text-center">
+                      <button
+                        onClick={() => openUploadModal(pkg.id)}
+                        className="w-full"
+                      >
+                        <Upload className="w-12 h-12 text-amber-600 mx-auto mb-2" />
+                        <p className="text-amber-800">Click để thêm ảnh menu</p>
+                      </button>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Party Features */}
+        <Card className="bg-gradient-to-br from-amber-50 to-white shadow-xl">
+          <CardContent className="p-8">
+            <h3 className="text-2xl text-amber-900 text-center mb-8">
+              Ưu Điểm Dịch Vụ Tổ Chức Tiệc
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {partyFeatures.map((feature, index) => (
+                <div key={index} className="flex items-start space-x-3">
+                  <CheckCircle2 className="w-6 h-6 text-amber-700 flex-shrink-0 mt-1" />
+                  <p className="text-gray-700">{feature}</p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* CTA */}
+        <div className="mt-12 text-center">
+          <Card className="bg-gradient-to-r from-amber-800 to-amber-900 text-white shadow-2xl">
+            <CardContent className="p-8">
+              <h3 className="text-3xl mb-4">Đặt Tiệc Ngay Hôm Nay!</h3>
+              <p className="text-xl mb-6 opacity-90">
+                Liên hệ để được tư vấn và nhận ưu đãi đặc biệt
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">📞</span>
+                  <div className="text-left">
+                    <p className="text-sm opacity-80">Hotline</p>
+                    <p className="text-xl">0905 657 585</p>
+                  </div>
+                </div>
+                <div className="hidden sm:block text-2xl opacity-50">|</div>
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">📞</span>
+                  <div className="text-left">
+                    <p className="text-sm opacity-80">Hotline 2</p>
+                    <p className="text-xl">0935 657 585</p>
+                  </div>
+                </div>
+                <div className="hidden sm:block text-2xl opacity-50">|</div>
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">📞</span>
+                  <div className="text-left">
+                    <p className="text-sm opacity-80">Hotline 3</p>
+                    <p className="text-xl">0886 737 373</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
+      {/* Upload Modal */}
+      {showUploadModal && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => setShowUploadModal(false)}
+        >
+          <div 
+            className="bg-white rounded-xl p-6 max-w-md w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-2xl text-gray-900">Thêm Ảnh Menu</h3>
+              <button
+                onClick={() => setShowUploadModal(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            <div className="mb-4">
+              <label className="block w-full">
+                <div className="border-2 border-dashed border-amber-300 rounded-lg p-8 text-center hover:bg-amber-50 transition-colors cursor-pointer">
+                  <Upload className="w-16 h-16 text-amber-600 mx-auto mb-3" />
+                  <p className="text-lg text-gray-700 mb-1">Upload ảnh từ máy tính</p>
+                  <p className="text-sm text-gray-500">Click để chọn file ảnh</p>
+                  <p className="text-xs text-gray-400 mt-2">Hỗ trợ: JPG, PNG, WEBP</p>
+                </div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileUpload}
+                  className="hidden"
+                />
+              </label>
+            </div>
+            
+            <button
+              onClick={() => setShowUploadModal(false)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+            >
+              Đóng
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Zoomed Image Modal */}
+      {zoomedImage && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
+          onClick={() => setZoomedImage(null)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+            onClick={() => setZoomedImage(null)}
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <img
+            src={zoomedImage}
+            alt="Menu phóng to"
+            className="max-w-full max-h-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+    </section>
+  );
+}
