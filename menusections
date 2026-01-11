@@ -1,0 +1,206 @@
+import { useState } from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { X } from 'lucide-react';
+
+// Import menu images for Gói Gém
+import goiGemMenu1 from 'figma:asset/9c649863aee3c5b5c0b0cccb1fa718a8b311af38.png';
+import goiGemMenu2 from 'figma:asset/7dde9aa207bc4680a2113f20dfd0723cfaca97fb.png';
+import goiGemMenu3 from 'figma:asset/b050436c71c09c94bcdf494decd8c3fa4a32f391.png';
+import goiGemMenu4 from 'figma:asset/ac3f655977d9f5c47552e5823709184b2543c8cc.png';
+
+// Import menu images for Gỏi Gém (6 images - 3 ảnh đầu + 3 ảnh sau)
+import goiGemSaladMenu1 from 'figma:asset/d29412a02af0662e23365641b798923f0174bd98.png';
+import goiGemSaladMenu2 from 'figma:asset/f5953cca94d05482c4654cd3b7f5adf69aec7aa9.png';
+import goiGemSaladMenu3 from 'figma:asset/b73548373ddab733581f245e872f91a59703544b.png';
+import goiGemSaladMenu4 from 'figma:asset/3d6ce12d0a1a047b3d38d6e7485c653f7c75ab4b.png';
+import goiGemSaladMenu5 from 'figma:asset/6a2672bd308c19c2065e9dfc570dc52e38c73592.png';
+import goiGemSaladMenu6 from 'figma:asset/19b99db38781066432bfaef1dbb3bdb4d34d6055.png';
+
+// Import menu images for Cơm Xôi vị Gém (2 images)
+import comXoiMenu1 from 'figma:asset/caeb52650516d52b470ef88f2e348b5dc1012c6d.png';
+import comXoiMenu2 from 'figma:asset/bed935e2a9377bc7e18cf9976147c111f7396a28.png';
+
+// Import menu images for Gém ăn Chơi (6 images - 3 ảnh đầu)
+import gemAnChoiMenu1 from 'figma:asset/d3665aaa53f7a44b69e84ae7364434fcdbac14a4.png';
+import gemAnChoiMenu2 from 'figma:asset/919e332faa26f6dc846bf50097240e508dd33663.png';
+import gemAnChoiMenu3 from 'figma:asset/0973d993c7e57ac828ac2a9276ea88915c8c9a27.png';
+import gemAnChoiMenu4 from 'figma:asset/d6bcda90a2db348282adca3a7d853929383a9122.png';
+import gemAnChoiMenu5 from 'figma:asset/8c38afe536841c37cda44d95de3202b39ee5e982.png';
+import gemAnChoiMenu6 from 'figma:asset/e772531ad9d6675ade576a9c30fe693eb307069d.png';
+
+// Import menu images for Gém Biển (6 images - 3 ảnh đầu)
+import gemBienMenu1 from 'figma:asset/d4e1677aaddd5da04a2073c01ff41564754e517b.png';
+import gemBienMenu2 from 'figma:asset/3c9d423f787ebefce45c54c34c9032e67de09892.png';
+import gemBienMenu3 from 'figma:asset/0856940fbe658d736b75988928bc96133e9f839b.png';
+import gemBienMenu4 from 'figma:asset/f73e669989f7cfb68d66d6d00d53fafb9cd141d1.png';
+import gemBienMenu5 from 'figma:asset/5766a8009b4367a130a4c130cbf27b4207fd2439.png';
+import gemBienMenu6 from 'figma:asset/949d5fe76b195099fd21e481bdb0e908fca3b6e4.png';
+
+// Import menu images for Lẩu ngon nhà gém (4 images - 2 ảnh đầu)
+import lauNgonMenu1 from 'figma:asset/a05f7c0fd867b0f2bc78b730cc45acc5c06321de.png';
+import lauNgonMenu2 from 'figma:asset/8aab69d84ca221c4d459cdcd86a51ad0fd40d1c2.png';
+import lauNgonMenu3 from 'figma:asset/ca4295afb3fced52c269d7a71897fec81840b665.png';
+import lauNgonMenu4 from 'figma:asset/4842d5a3b5eca0bdc85cfe1cd144cb056aa69771.png';
+
+// Import menu images for Mâm cơm nhà gém (5 images - 3 ảnh đầu)
+import mamComMenu1 from 'figma:asset/dd35cca201ab1dc614a7c613b4cee8554c0902e2.png';
+import mamComMenu2 from 'figma:asset/c326bf311a6c62d139461010043bbe53794c786e.png';
+import mamComMenu3 from 'figma:asset/0718269f8009d6373e6813773df42485241285bc.png';
+import mamComMenu4 from 'figma:asset/48502bf915bf650687394c8da8b0ad4d9fb14a4b.png';
+import mamComMenu5 from 'figma:asset/813a366a2e613dfc72d56860f94aad5cf41e9cd2.png';
+
+// Import menu images for Kèm vị mâm cơm (3 images)
+import kemViMenu1 from 'figma:asset/86470531eab8f2724a7ca89eca0af5b2081f7325.png';
+import kemViMenu2 from 'figma:asset/5909eb17903333be029a872cb028a6cb95db20f2.png';
+import kemViMenu3 from 'figma:asset/e2031e4f655804817ab450357e7652304dae986b.png';
+import kemViMenu4 from 'figma:asset/8175e8b0371c73f8a7dfa9806853f7d8fe14e2ca.png';
+
+// Import menu images for Gém mặn mà (8 images - 3 ảnh đầu)
+import gemManMenu1 from 'figma:asset/38222eca62011e9159cf43f3756a491f1d9d5e54.png';
+import gemManMenu2 from 'figma:asset/96777a2ffd6f091c0caf7779a6f5d0bd3498c538.png';
+import gemManMenu3 from 'figma:asset/133a54936d83bed6e8b6873957b471a9f21c1521.png';
+import gemManMenu4 from 'figma:asset/40fd7b8e423356d208e601e13c55f5398dfb47af.png';
+import gemManMenu5 from 'figma:asset/34931f96d9b682f93d2714945b04a77129be4565.png';
+import gemManMenu6 from 'figma:asset/dd91e8e194b6fdc51a1af257374edadc7ff698db.png';
+import gemManMenu7 from 'figma:asset/97c6dad98e19f99b69988a0e43867343fbbde94d.png';
+import gemManMenu8 from 'figma:asset/2c43922fff633c79122a4d616d5c3de88926474e.png';
+
+// Import menu images for Gém canh (2 images)
+import gemCanhMenu1 from 'figma:asset/da125893afc576f2e42ead7dd4f784b0529dd998.png';
+import gemCanhMenu2 from 'figma:asset/e8a918cbcfc38c63580855a1de0e5f3753d05c25.png';
+
+// Import menu images for Gém tiệc (7 images - 3 ảnh đầu)
+import gemTiecMenu1 from 'figma:asset/ff7153c96eed558f0517b7bc5a72515abaa21b00.png';
+import gemTiecMenu2 from 'figma:asset/e7231cbbb359618b14cc8403b67af7908ae74b13.png';
+import gemTiecMenu3 from 'figma:asset/cb6b615cfd6408d625a67a0f87c59a1ea7ec11eb.png';
+import gemTiecMenu4 from 'figma:asset/d1281c1805d55cedf12d602c0d69ee1c0aa670bf.png';
+import gemTiecMenu5 from 'figma:asset/7f49d0cf5b7a62a0792eabfee64701a404f3e7b1.png';
+import gemTiecMenu6 from 'figma:asset/48ed5f3c8faca53bcad0a3a88d51035a8fb6d5db.png';
+import gemTiecMenu7 from 'figma:asset/424bbb4a92ae557a87d95979b6493a86cec88295.png';
+
+// Import menu images for Gém ngọt (3 images)
+import gemNgotMenu1 from 'figma:asset/97fafa72da8cd2b90788563f253bc2400ee5cf3b.png';
+import gemNgotMenu2 from 'figma:asset/5b358e8347655f846f44b5e6810080ac1cab6377.png';
+import gemNgotMenu3 from 'figma:asset/37dccc507e9a6515190610749f4f9724a35874aa.png';
+
+export function MenuSection() {
+  const [selectedCategory, setSelectedCategory] = useState('goiGem');
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+
+  // Menu images for each category (can be single image or array of images)
+  const categoryMenuImages: Record<string, string[] | null> = {
+    goiGem: [goiGemMenu1, goiGemMenu2, goiGemMenu3, goiGemMenu4], // Gói Gém - 4 images
+    goiGemSalad: [goiGemSaladMenu1, goiGemSaladMenu2, goiGemSaladMenu3, goiGemSaladMenu4, goiGemSaladMenu5, goiGemSaladMenu6], // Gỏi Gém
+    comXoi: [comXoiMenu1, comXoiMenu2], // Cơm Xôi vị Gém
+    gemAnChoi: [gemAnChoiMenu1, gemAnChoiMenu2, gemAnChoiMenu3, gemAnChoiMenu4, gemAnChoiMenu5, gemAnChoiMenu6], // Gém ăn Chơi
+    gemBien: [gemBienMenu1, gemBienMenu2, gemBienMenu3, gemBienMenu4, gemBienMenu5, gemBienMenu6], // Gém Biển
+    lauNgon: [lauNgonMenu1, lauNgonMenu2, lauNgonMenu3, lauNgonMenu4], // Lẩu ngon nhà gém
+    mamCom: [mamComMenu1, mamComMenu2, mamComMenu3, mamComMenu4, mamComMenu5], // Mâm cơm nhà gém
+    kemVi: [kemViMenu1, kemViMenu2, kemViMenu3, kemViMenu4], // Kèm vị tâm gém
+    gemMan: [gemManMenu1, gemManMenu2, gemManMenu3, gemManMenu4, gemManMenu5, gemManMenu6, gemManMenu7, gemManMenu8], // Gém mặn mà
+    gemCanh: [gemCanhMenu1, gemCanhMenu2], // Gém canh
+    gemTiec: [gemTiecMenu1, gemTiecMenu2, gemTiecMenu3, gemTiecMenu4, gemTiecMenu5, gemTiecMenu6, gemTiecMenu7], // Gém tiệc
+    gemNgot: [gemNgotMenu1, gemNgotMenu2, gemNgotMenu3], // Gém ngọt
+  };
+
+  const categories = [
+    { id: 'goiGem', name: 'Gói Gém' },
+    { id: 'goiGemSalad', name: 'Gỏi Gém' },
+    { id: 'comXoi', name: 'Cơm Xôi vị Gém' },
+    { id: 'gemAnChoi', name: 'Gém ăn Chơi' },
+    { id: 'gemBien', name: 'Gém Biển' },
+    { id: 'lauNgon', name: 'Lẩu ngon nhà gém' },
+    { id: 'mamCom', name: 'Mâm cơm nhà gém' },
+    { id: 'kemVi', name: 'Kèm vị mâm cơm' },
+    { id: 'gemMan', name: 'Gém mặn mà' },
+    { id: 'gemCanh', name: 'Gém canh' },
+    { id: 'gemTiec', name: 'Gém tiệc' },
+    { id: 'gemNgot', name: 'Gém ngọt' },
+  ];
+
+  return (
+    <section id="menu" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <div className="inline-block mb-4">
+            <div className="h-1 w-16 bg-amber-700 mx-auto mb-4"></div>
+          </div>
+          <h2 className="text-4xl md:text-5xl text-amber-900 mb-4">
+            Thực Đơn A La Carte
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Khám phá hương vị đặc sắc của ẩm thực Việt Nam với thực đơn phong phú và đa dạng
+          </p>
+        </div>
+
+        <Tabs defaultValue="goiGem" className="w-full" onValueChange={(value) => setSelectedCategory(value)}>
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mb-8 h-auto gap-2">
+            {categories.map((cat) => (
+              <TabsTrigger key={cat.id} value={cat.id} className="py-3 px-2">
+                {cat.name}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
+          {categories.map((cat) => (
+            <TabsContent key={cat.id} value={cat.id}>
+              <div className="rounded-xl overflow-hidden shadow-2xl bg-white">
+                {categoryMenuImages[cat.id] ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+                    {categoryMenuImages[cat.id]!.map((img, index) => (
+                      <img
+                        key={index}
+                        src={img}
+                        alt={`Menu ${cat.name}`}
+                        className="w-full h-auto object-contain cursor-pointer hover:opacity-90 transition-opacity rounded-lg shadow-md"
+                        onClick={() => setZoomedImage(img)}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="w-full h-96 flex items-center justify-center bg-amber-50 border-2 border-dashed border-amber-300">
+                    <div className="text-center">
+                      <p className="text-2xl text-amber-800 mb-2">{cat.name}</p>
+                      <p className="text-gray-600">Đang cập nhật ảnh menu...</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </TabsContent>
+          ))}
+        </Tabs>
+
+        {zoomedImage && (
+          <div 
+            className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4"
+            onClick={() => setZoomedImage(null)}
+          >
+            <div className="relative max-w-7xl max-h-screen">
+              <img
+                src={zoomedImage}
+                alt="Zoomed Menu"
+                className="max-w-full max-h-screen object-contain"
+                onClick={(e) => e.stopPropagation()}
+              />
+              <button
+                className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors"
+                onClick={() => setZoomedImage(null)}
+              >
+                <X className="w-6 h-6 text-gray-700" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        <div className="mt-12 text-center bg-amber-50 p-8 rounded-xl border border-amber-200">
+          <p className="text-gray-700 mb-2">
+            * Giá có thể thay đổi tùy theo mùa và nguyên liệu
+          </p>
+          <p className="text-gray-700">
+            Vui lòng liên hệ với chúng tôi để biết thêm chi tiết và đặt bàn trước
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
