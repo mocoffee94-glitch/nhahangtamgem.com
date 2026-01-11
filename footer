@@ -1,0 +1,96 @@
+import { Facebook, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import logoImage from 'figma:asset/38ca8cdd321999282b0fca4e8ccfb61dd424d7a2.png';
+
+export function Footer() {
+  return (
+    <footer className="bg-gray-900 text-white pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-4 gap-8 mb-12">
+          {/* About */}
+          <div>
+            <div className="flex items-center space-x-3 mb-4">
+              <img src={logoImage} alt="Tâm Gém Logo" className="h-12 w-auto brightness-0 invert" />
+            </div>
+            <p className="text-gray-400 mb-4">
+              Nhà hàng ẩm thực truyền thống Việt Nam tại Đồng Hới, Quảng Bình. 
+              Phục vụ với tâm huyết và chất lượng.
+            </p>
+            <div className="flex space-x-4">
+              <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-amber-700 transition-colors">
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-amber-700 transition-colors">
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-amber-700 transition-colors">
+                <Mail className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-xl mb-4">Liên Kết Nhanh</h3>
+            <ul className="space-y-2">
+              <li><a href="#home" className="text-gray-400 hover:text-white transition-colors">Trang Chủ</a></li>
+              <li><a href="#about" className="text-gray-400 hover:text-white transition-colors">Giới Thiệu</a></li>
+              <li><a href="#menu" className="text-gray-400 hover:text-white transition-colors">Thực Đơn</a></li>
+              <li><a href="#tours" className="text-gray-400 hover:text-white transition-colors">Tour Đoàn</a></li>
+              <li><a href="#banquet" className="text-gray-400 hover:text-white transition-colors">Tổ Chức Tiệc</a></li>
+              <li><a href="#contact" className="text-gray-400 hover:text-white transition-colors">Liên Hệ</a></li>
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h3 className="text-xl mb-4">Dịch Vụ</h3>
+            <ul className="space-y-2 text-gray-400">
+              <li>Ăn uống A la carte</li>
+              <li>Tour đoàn du lịch</li>
+              <li>Tiệc cưới</li>
+              <li>Tiệc công ty</li>
+              <li>Hội nghị - Sự kiện</li>
+              <li>Đặt tiệc tại nhà</li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="text-xl mb-4">Liên Hệ</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start">
+                <MapPin className="w-5 h-5 mr-2 text-amber-700 flex-shrink-0 mt-1" />
+                <span className="text-gray-400">118 Hữu Nghị, Nam Lý, Đồng Hới, Quảng Bình</span>
+              </li>
+              <li className="flex items-start mb-3">
+                <Phone className="w-5 h-5 mr-2 text-amber-700 flex-shrink-0" />
+                <div className="text-gray-400">
+                  <div>0905 657 585</div>
+                  <div>0935 657 585</div>
+                  <div>0886 737 373</div>
+                </div>
+              </li>
+              <li className="flex items-center">
+                <Mail className="w-5 h-5 mr-2 text-amber-700 flex-shrink-0" />
+                <span className="text-gray-400">info@tamgem.vn</span>
+              </li>
+            </ul>
+            <div className="mt-4 pt-4 border-t border-gray-800">
+              <p className="text-gray-400">
+                Giờ phục vụ:<br />
+                <span className="text-white">10:00 - 22:00</span><br />
+                Thứ 2 - Chủ Nhật
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-gray-800 text-center text-gray-400">
+          <p>&copy; {new Date().getFullYear()} Nhà Hàng Tâm Gém. Tất cả quyền được bảo lưu.</p>
+          <p className="mt-2 text-sm">Thiết kế với ❤️ tại Đồng Hới, Quảng Bình</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
